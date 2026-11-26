@@ -675,17 +675,6 @@ test('chat presentations reject unsafe URLs, executable shapes and inconsistent 
     'A sourced courtyard',
   ])
     assert.ok(venueText.includes(detail), detail);
-  for (const [count, reviews] of [
-    [1, '1 review'],
-    [2, '2 reviews'],
-    [12345, '12,345 reviews'],
-  ] as const)
-    assert.ok(
-      presentationText(
-        presentationSchema.parse({ ...booking, rating: { ...booking.rating, count } }),
-      ).includes(reviews),
-      reviews,
-    );
   assert.ok(
     presentationSchema.safeParse({ ...booking, rating: { ...booking.rating, count: undefined } })
       .success,

@@ -424,6 +424,10 @@ export function mapLocationUrl(place: { latitude: number; longitude: number }) {
   return `https://www.openstreetmap.org/?mlat=${place.latitude}&mlon=${place.longitude}#map=15/${place.latitude}/${place.longitude}`;
 }
 
+export function reviewCount(count: number) {
+  return `${count.toLocaleString()} ${count === 1 ? 'review' : 'reviews'}`;
+}
+
 export function presentationText(value: Presentation) {
   if (value.type === 'schedule-run') return '';
   const lines = [value.title];
@@ -562,9 +566,7 @@ export function presentationText(value: Presentation) {
         lines.push(
           [
             `Rating: ${rating.value}/${rating.scale}`,
-            rating.count === undefined
-              ? undefined
-              : `${rating.count.toLocaleString()} ${rating.count === 1 ? 'review' : 'reviews'}`,
+            rating.count === undefined ? undefined : reviewCount(rating.count),
             `${rating.sourceLabel}: ${rating.url}`,
             rating.summary,
           ]
